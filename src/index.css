@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: #FBF3EA;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(216,163,174,0.15), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(110,42,56,0.08), transparent 45%);
+  color: #3A2530;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-script { font-family: 'Caveat', cursive; }
+
+/* subtle film-grain texture overlay */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.paper-texture {
+  background-color: #FBF3EA;
+  background-image:
+    linear-gradient(rgba(110,42,56,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110,42,56,0.03) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.tape {
+  position: absolute;
+  width: 70px;
+  height: 24px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.35));
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  opacity: 0.85;
+}
+
+@keyframes screen-shake {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-14px, 8px); }
+  20% { transform: translate(14px, -8px); }
+  30% { transform: translate(-12px, 10px); }
+  40% { transform: translate(12px, -10px); }
+  50% { transform: translate(-9px, 6px); }
+  60% { transform: translate(9px, -6px); }
+  70% { transform: translate(-5px, 4px); }
+  80% { transform: translate(5px, -4px); }
+  90% { transform: translate(-2px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+.screen-shake {
+  animation: screen-shake 0.6s ease-in-out;
+}
+
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
